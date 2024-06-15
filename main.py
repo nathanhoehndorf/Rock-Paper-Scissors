@@ -2,7 +2,7 @@ import tkinter as tk
 import random
 
 user_choice = ""
-result = ""
+comp_choice = ""
 
 choices = ['Rock', 'Paper', 'Scissors']
 wins = {
@@ -14,7 +14,10 @@ wins = {
 
 def who_wins():
     global result
+    global comp_choice
     comp_choice = random.choice(choices)
+
+    display_choices()
 
     if user_choice == comp_choice:
         output.set("It's a Tie!")
@@ -24,6 +27,12 @@ def who_wins():
         output.set("You Win!")
     else:
         output.set("Something went wrong.")
+
+
+def display_choices():
+    global user_choice
+    global comp_choice
+    plays.set(f"User: {user_choice} - Computer: {comp_choice}")
 
 
 def set_user_choice(symbol):
@@ -47,10 +56,16 @@ scissors_button.grid(row=1, column=3)
 
 frame.pack()
 
+plays = tk.StringVar()
+plays.set("")
+
+play_out = tk.Label(root, textvariable=plays)
+play_out.pack()
+
 output = tk.StringVar()
 output.set("")
 
-label = tk.Label(root, textvariable=output)
-label.pack()
+result = tk.Label(root, textvariable=output)
+result.pack()
 
 root.mainloop()
